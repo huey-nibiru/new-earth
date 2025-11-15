@@ -1,0 +1,160 @@
+.post-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.post-editor-wrapper {
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.post-toolbar {
+  display: flex;
+  gap: 0.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #333;
+  margin-bottom: 0.75rem;
+}
+
+.toolbar-btn {
+  background: transparent;
+  border: 1px solid #444;
+  color: #fff;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+}
+
+.toolbar-btn:hover {
+  background: #2a2a2a;
+  border-color: #666;
+}
+
+.toolbar-btn:active {
+  background: #333;
+}
+
+.toolbar-btn strong {
+  font-weight: 700;
+}
+
+.toolbar-btn em {
+  font-style: italic;
+}
+
+.post-editor {
+  min-height: 120px;
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 0.75rem;
+  background: #111;
+  border: 1px solid #333;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 1rem;
+  line-height: 1.5;
+  outline: none;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.post-editor:focus {
+  border-color: #666;
+  background: #0f0f0f;
+}
+
+.post-editor[data-placeholder]:empty:before {
+  content: attr(data-placeholder);
+  color: #666;
+  pointer-events: none;
+}
+
+.post-editor h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0.5rem 0;
+  color: #fff;
+}
+
+.post-editor strong {
+  font-weight: 700;
+}
+
+.post-editor em {
+  font-style: italic;
+}
+
+.post-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #333;
+}
+
+.post-error {
+  color: #ff6b6b;
+  font-size: 0.875rem;
+  flex: 1;
+}
+
+.post-button {
+  background: #ffd700;
+  color: #000;
+  border: none;
+  padding: 0.625rem 1.5rem;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-width: 80px;
+}
+
+.post-button:hover:not(:disabled) {
+  background: #ffed4e;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(255, 215, 0, 0.3);
+}
+
+.post-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.post-button:disabled {
+  background: #666;
+  color: #999;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Scrollbar styling for post editor */
+.post-editor::-webkit-scrollbar {
+  width: 8px;
+}
+
+.post-editor::-webkit-scrollbar-track {
+  background: #1a1a1a;
+  border-radius: 4px;
+}
+
+.post-editor::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 4px;
+}
+
+.post-editor::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

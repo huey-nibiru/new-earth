@@ -1,0 +1,19 @@
+.header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.header h1 {
+  margin-bottom: 1rem;
+}
+
+.header p {
+  line-height: 1.6;
+}
+
+.data-tiles-container {
+  margin-top: 3rem;
+  padding: 0 10rem;
+}
