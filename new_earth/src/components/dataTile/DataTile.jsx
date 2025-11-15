@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import supabase from "../../services/supabaseClient";
 import "./DataTile.css";
+// used to display content from the database
 
 const DataTile = ({ schema = "public", tableName }) => {
   const [data, setData] = useState([]);
