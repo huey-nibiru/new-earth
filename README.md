@@ -1,6 +1,6 @@
 # New Earth
 
-Christianity will always be downstream from the Bible, but the world is often incompatible with the true nature of Christ's teachings. Theres only a small amount of Christians who truly follow the Bible, and even fewer who have an applied perspective on how the world could operate in the way Jesus would. After realizing how much I still do not understand, I wanted a hub where both experienced Christians and new Christians could organize and explore different aspects of modern life through a Christian lens.
+Christianity will always be downstream from the Bible, but the world is often incompatible with the true nature of Christ's teachings. Theres only a small amount of Christians who truly follow the Bible, and even fewer who have an applied perspective on how a Christ centered society could operate. After realizing how much I still do not understand, I wanted a hub where both experienced Christians and new Christians could organize and explore different aspects of modern life through a Christian lens.
 
 <img width="1920" height="998" alt="Screenshot 2025-11-15 at 6 54 01 PM" src="https://github.com/user-attachments/assets/d1d092ff-a2b3-45b3-98d2-c362d6327b73" />
 
