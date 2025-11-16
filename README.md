@@ -10,6 +10,8 @@ Everything will always be downstream from the Bible, but the world is often inco
 
 New Earth is a centralized hub for exploring Christian thought across 12 key life domains. The navigation hub featuring a central gold cross icon surrounded by 12 navigation points represents a different aspect of life. A click on the central cross will route you to the Bible.
 
+Each section has its own theme but remains interconnected with the other sections. Dial in to your expertise and share insights, experiences, and strategies. Ask questions that intrigue you and receive answers from others.
+
 ## Core Features
 
 - **User Auth** - Secure authentication powered by Supabase with session management.
@@ -25,7 +27,7 @@ Each section has a theme but theres an interconnectedness between each. Dial in 
 
 1. **Faith & Worship** - Share life experience, tips on handling faith, and prayers.
 2. **Education & Knowledge** - Educational content (math, science, history, random facts, etc). All knowledge leads back to God.
-3. **Family & Community Life** - Family-focused resources and
+3. **Family & Community Life** - Family-focused resources
 4. **Governance & Justice** - Governance and legal information
 5. **Economy & Work** - Economic and employment resources
 6. **Health & Well-being** - Share diet, gym routines, mental health practices
