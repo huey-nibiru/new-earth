@@ -24,10 +24,15 @@
 
 .about-details strong,
 .about-details ol,
-.about-details li {
+.about-details li,
+.about-details li strong {
   color: black;
 }
 
 .about-details ol {
   text-align: left;
+}
+.about-details li strong {
+  color: black !important;
+  filter: none !important;
 }
