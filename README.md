@@ -1,12 +1,12 @@
 # New Earth
 
-A comprehensive web application designed to organize and explore various aspects of Christian life through 12 interconnected sections, built with React and Supabase.
+Many people fail to understand Christianity from an applied perspective. Most of religion is false. After realizing this I decided more people should organize and explore different aspects of Christian life through the 12 sections provided.
 
 <img width="1920" height="998" alt="Screenshot 2025-11-15 at 6 54 01 PM" src="https://github.com/user-attachments/assets/d1d092ff-a2b3-45b3-98d2-c362d6327b73" />
 
 ## Overview
 
-New Earth is a centralized hub for exploring Christian thought across 12 key life domains. The navigation hub featuring a central gold cross icon surrounded by 12 navigation points, each represents a different aspect of life.
+New Earth is a centralized hub for exploring Christian thought across 12 key life domains. The navigation hub featuring a central gold cross icon surrounded by 12 navigation points represents a different aspect of life. A click on the central cross will route you to the Bible.
 
 ## Core
 
