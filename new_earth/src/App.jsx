@@ -33,7 +33,7 @@ function App() {
       });
     }
   }, []);
-  // FOR LANDING PAGE AUDIO ONLY------------------------------------------------
+  // FOR LANDING PAGE AUDIO ONLY-----------------------------------------------
 
   return (
     <Router>
