@@ -1,4 +1,4 @@
-# [New Earth]: https://newearth-in-christ.com/
+# [New Earth](https://newearth-in-christ.com/)
 
 There will always be an emphasis on putting **THE BIBLE FIRST**, but a huge problem for me and many others who walked away from faith was not having a proper church or group of people that truly broke down what it meant to be Christian in a modern world. Much of what I disliked about Christianity was actually **CARNAL CHRISTIANITY**. Eventually if you want truth you'll find it; there are plenty of resources online that can help you understand exactly how to grow in faith and/or operate in the world as someone with faith.
 
