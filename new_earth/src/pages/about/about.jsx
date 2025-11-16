@@ -1,20 +1,26 @@
 import "./about.css";
+import goldCross from "../../assets/goldcross.png";
 
 const About = () => {
   return (
     <div className="about">
-      <h1 className="about-header">About</h1>
       <div className="about-details">
+        <img
+          src={goldCross}
+          alt="Gold Cross"
+          style={{ width: "50px", height: "auto", margin: "10px 0" }}
+        />
         <p>
           There will always be an emphasis on putting{" "}
-          <strong>THE BIBLE FIRST</strong>, but a huge problem for me and many
-          others who walked away from faith was not having a proper church or
-          group of people that truly broke down what it meant to be Christian in
-          a modern world. Much of what I disliked about Christianity was
-          actually <strong>CARNAL CHRISTIANITY</strong>. Eventually if you want
-          truth you'll find it; there are plenty of resources online that can
-          help you understand exactly how to grow in faith and/or operate in the
-          world as someone with faith.
+          <strong style={{ color: "red" }}>THE BIBLE FIRST</strong>, but a huge
+          problem for me and many others who walked away from faith was not
+          having a proper church or group of people that truly broke down what
+          it meant to be Christian in a modern world. Much of what I disliked
+          about Christianity was actually{" "}
+          <strong style={{ color: "red" }}>CARNAL CHRISTIANITY</strong>.
+          Eventually if you want truth you'll find it; there are plenty of
+          resources online that can help you understand exactly how to grow in
+          faith and/or operate in the world as someone with faith.
         </p>
         <p>
           Everything will always be downstream from the Bible, but the world is
@@ -46,7 +52,7 @@ const About = () => {
         <p>
           <strong>12 Core Sections</strong>
         </p>
-        <ol className="about-details-list" style={{ textAlign: "left" }}>
+        <ol>
           <li>
             <strong>Education & Knowledge</strong> - Educational content (math,
             science, history, random facts, etc). All knowledge leads back to

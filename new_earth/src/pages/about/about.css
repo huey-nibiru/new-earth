@@ -22,3 +22,12 @@
   margin-bottom: 0;
 }
 
+.about-details strong,
+.about-details ol,
+.about-details li {
+  color: black;
+}
+
+.about-details ol {
+  text-align: left;
+}

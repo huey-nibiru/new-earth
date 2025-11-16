@@ -43,7 +43,6 @@
 .dark-mode h5,
 .dark-mode h6,
 .dark-mode p,
-.dark-mode span,
 .dark-mode div,
 .dark-mode a,
 .dark-mode button,
@@ -51,6 +50,8 @@
 .dark-mode textarea,
 .dark-mode label,
 .dark-mode li,
+.dark-mode ol,
+.dark-mode strong,
 .dark-mode td,
 .dark-mode th {
   filter: invert(1) hue-rotate(180deg);
