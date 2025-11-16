@@ -22,6 +22,8 @@
 
 .navbar-left {
   justify-content: flex-start;
+  gap: 1rem;
+  align-items: center;
 }
 
 .navbar-center {
@@ -160,6 +162,22 @@
   transform: scale(1.1);
 }
 
+/* About Link */
+.navbar-about-link {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--navbar-about-color, #374151);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.navbar-about-link:hover {
+  background-color: var(--navbar-about-hover, #f3f4f6);
+  color: var(--navbar-about-hover-color, #1f2937);
+}
+
 /* Dark Mode Styles */
 .dark-mode {
   --navbar-bg: #1f2937;
@@ -178,6 +196,9 @@
   --theme-toggle-hover: #4b5563;
   --theme-toggle-hover-border: #9ca3af;
   --logo-filter: invert(1);
+  --navbar-about-color: #f9fafb;
+  --navbar-about-hover: #4b5563;
+  --navbar-about-hover-color: #f9fafb;
 }
 
 /* Ensure navbar text inverts properly in dark mode */
@@ -204,6 +225,9 @@
   --theme-toggle-hover: #f3f4f6;
   --theme-toggle-hover-border: #6b7280;
   --logo-filter: none;
+  --navbar-about-color: #374151;
+  --navbar-about-hover: #f3f4f6;
+  --navbar-about-hover-color: #1f2937;
 }
 
 /* Responsive Design */

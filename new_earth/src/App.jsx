@@ -13,6 +13,7 @@ import Service from "./pages/service/service";
 import Environment from "./pages/environment/environment";
 import Defense from "./pages/defense/defense";
 import Settings from "./pages/settings/settings";
+import About from "./pages/about/about";
 import Navbar from "./components/navBar/NavBar";
 import Home from "./pages/home/home";
 import "./App.css";
@@ -25,6 +26,7 @@ function App() {
 
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
           <Route path="/faith-and-worship" element={<Faith />} />
           <Route path="/education-and-knowledge" element={<Education />} />
           <Route path="/family-and-community-life" element={<Family />} />

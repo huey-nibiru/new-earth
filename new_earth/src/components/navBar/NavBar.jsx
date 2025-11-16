@@ -105,6 +105,9 @@ const Navbar = () => {
             className="navbar-logo"
           />
         </a>
+        <Link to="/about" className="navbar-about-link">
+          About
+        </Link>
       </div>
 
       <div className="navbar-center">
