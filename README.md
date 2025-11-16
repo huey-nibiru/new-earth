@@ -8,7 +8,7 @@ A comprehensive web application designed to organize and explore various aspects
 
 New Earth is a centralized hub for exploring Christian thought across 12 key life domains. The navigation hub featuring a central gold cross icon surrounded by 12 navigation points, each represents a different aspect of life.
 
-## Features
+## Core
 
 - 🔐 **User Authentication** - Secure authentication powered by Supabase with session management
 - 🎯 **Central Hub Navigation** - Beautiful circular navigation interface with 12 sections arranged around a central gold cross icon
