@@ -13,6 +13,7 @@ import Service from "./pages/service/service";
 import Environment from "./pages/environment/environment";
 import Defense from "./pages/defense/defense";
 import Settings from "./pages/settings/settings";
+import Profile from "./pages/profile/profile";
 import About from "./pages/about/about";
 import Navbar from "./components/navBar/NavBar";
 import Home from "./pages/home/home";
@@ -69,6 +70,7 @@ function App() {
           />
           <Route path="/defense-and-safety" element={<Defense />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </div>
     </Router>

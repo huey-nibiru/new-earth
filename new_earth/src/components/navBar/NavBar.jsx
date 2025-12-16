@@ -127,6 +127,13 @@ const Navbar = () => {
             {isDropdownOpen && (
               <div className="username-dropdown">
                 <Link
+                  to="/profile"
+                  className="dropdown-item"
+                  onClick={() => setIsDropdownOpen(false)}
+                >
+                  Profile
+                </Link>
+                <Link
                   to="/settings"
                   className="dropdown-item"
                   onClick={() => setIsDropdownOpen(false)}

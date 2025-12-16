@@ -1,0 +1,161 @@
+.profile-page {
+  min-height: 100vh;
+  padding: 2rem 0;
+}
+
+.page-content {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.page-content h1 {
+  margin-bottom: 2rem;
+  color: gold;
+}
+
+.loading-container {
+  padding: 3rem;
+  color: #eee;
+}
+
+.profile-card {
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 12px;
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 600px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.profile-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #333;
+}
+
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, gold, #ffd700);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #000;
+  box-shadow: 0 4px 8px rgba(255, 215, 0, 0.3);
+}
+
+.profile-header h2 {
+  color: gold;
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.info-section {
+  text-align: left;
+}
+
+.info-section h3 {
+  color: gold;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  border-bottom: 1px solid #333;
+  padding-bottom: 0.5rem;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.info-item:last-child {
+  border-bottom: none;
+}
+
+.info-label {
+  color: #aaa;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.info-value {
+  color: #eee;
+  font-size: 0.95rem;
+  text-align: right;
+  word-break: break-word;
+  max-width: 60%;
+}
+
+.info-value.user-id {
+  font-family: monospace;
+  font-size: 0.85rem;
+  color: #888;
+}
+
+.info-value.highlight {
+  color: gold;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.error-message {
+  color: #ff6b6b;
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 0.75rem;
+  background: rgba(255, 107, 107, 0.1);
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  border: 1px solid rgba(255, 107, 107, 0.3);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .page-content {
+    padding: 1rem;
+  }
+
+  .profile-card {
+    padding: 1.5rem;
+    margin: 1rem auto;
+  }
+
+  .profile-avatar {
+    width: 60px;
+    height: 60px;
+    font-size: 2rem;
+  }
+
+  .profile-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .info-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .info-value {
+    max-width: 100%;
+    text-align: left;
+  }
+}
