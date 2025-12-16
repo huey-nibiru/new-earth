@@ -36,3 +36,9 @@
   color: black !important;
   filter: none !important;
 }
+.dark-mode .about-details strong,
+.dark-mode .about-details ol,
+.dark-mode .about-details li,
+.dark-mode .about-details li strong {
+  color: white !important;
+}

@@ -56,11 +56,6 @@
 
 .navbar-username:hover {
   background-color: var(--navbar-username-hover, #e5e7eb);
-  transform: translateY(-1px);
-}
-
-.navbar-username:active {
-  transform: translateY(0);
 }
 
 /* Dropdown Menu */
@@ -178,7 +173,7 @@
 }
 
 /* Ensure navbar text inverts properly in dark mode */
-.dark-mode .navbar-title,
+
 .dark-mode .theme-toggle {
   filter: invert(1) hue-rotate(180deg);
 }
@@ -207,10 +202,6 @@
     font-size: 0.875rem;
     padding: 0.375rem 0.75rem;
   }
-
-  .username-dropdown {
-    min-width: 120px;
-  }
 }
 
 @media (max-width: 480px) {
@@ -237,12 +228,7 @@
     padding: 0.25rem 0.5rem;
   }
 
-  .username-dropdown {
-    min-width: 100px;
-  }
-
   .dropdown-item {
-    padding: 0.5rem 0.75rem;
     font-size: 0.75rem;
   }
 }
