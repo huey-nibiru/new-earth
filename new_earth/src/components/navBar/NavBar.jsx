@@ -73,7 +73,7 @@ const Navbar = () => {
   const getUsername = () => {
     if (!user) return null;
     return (
-      user.user_metadata?.display_name ||
+      user.user_metadata?.username ||
       user.user_metadata?.username ||
       user.user_metadata?.full_name ||
       "User"

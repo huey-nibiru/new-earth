@@ -4,7 +4,7 @@ import "./settings.css";
 
 const Settings = () => {
   const [user, setUser] = useState(null);
-  const [displayName, setDisplayName] = useState("");
+  const [displayName, setUsername] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
@@ -15,8 +15,8 @@ const Settings = () => {
       setUser(session?.user ?? null);
       if (session?.user) {
         // Pre-populate with current display name if it exists
-        setDisplayName(
-          session.user.user_metadata?.display_name ||
+        setUsername(
+          session.user.user_metadata?.username ||
             session.user.user_metadata?.full_name ||
             ""
         );
@@ -29,8 +29,8 @@ const Settings = () => {
     } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null);
       if (session?.user) {
-        setDisplayName(
-          session.user.user_metadata?.display_name ||
+        setUsername(
+          session.user.user_metadata?.username ||
             session.user.user_metadata?.full_name ||
             ""
         );
@@ -48,7 +48,7 @@ const Settings = () => {
 
     try {
       const { data, error: updateError } = await supabase.auth.updateUser({
-        data: { display_name: displayName.trim() },
+        data: { username: displayName.trim() },
       });
 
       if (updateError) throw updateError;
@@ -78,7 +78,7 @@ const Settings = () => {
                 type="text"
                 placeholder="Enter your display name"
                 value={displayName}
-                onChange={(e) => setDisplayName(e.target.value)}
+                onChange={(e) => setUsername(e.target.value)}
                 disabled={loading || !user}
                 required
               />

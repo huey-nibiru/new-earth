@@ -53,8 +53,8 @@ const Post = ({ tableName, schema = "public", onPostSuccess }) => {
       const htmlContent = editorRef.current.innerHTML;
 
       // Get display_name from user metadata
-      const displayName =
-        user.user_metadata?.display_name ||
+      const userName =
+        user.user_metadata?.username ||
         user.email?.split("@")[0] ||
         "Anonymous";
 
@@ -67,7 +67,7 @@ const Post = ({ tableName, schema = "public", onPostSuccess }) => {
             content: htmlContent,
             // content_text: plainText,
             user_id: user.id,
-            username: displayName,
+            username: userName,
             created_at: new Date().toISOString(),
           },
         ])

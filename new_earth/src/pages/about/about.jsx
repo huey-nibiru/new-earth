@@ -54,6 +54,10 @@ const About = () => {
         </p>
         <ol>
           <li>
+            <strong>Faith & Worship</strong> - Share life experience, tips on
+            handling faith, and prayers.{" "}
+          </li>
+          <li>
             <strong>Education & Knowledge</strong> - Educational content (math,
             science, history, random facts, etc). All knowledge leads back to
             God.{" "}
