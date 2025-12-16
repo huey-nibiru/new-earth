@@ -71,7 +71,8 @@
   background-color: var(--dropdown-bg, #ffffff);
   border: 1px solid var(--dropdown-border, #e5e7eb);
   border-radius: 0.5rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
   min-width: 150px;
   z-index: 1000;
   overflow: hidden;
@@ -128,9 +129,7 @@
 }
 
 .theme-toggle:hover {
-  background-color: var(--theme-toggle-hover, #f3f4f6);
   transform: scale(1.1);
-  border-color: var(--theme-toggle-hover-border, #6b7280);
 }
 
 .theme-toggle:active {
@@ -178,56 +177,10 @@
   color: var(--navbar-about-hover-color, #1f2937);
 }
 
-/* Dark Mode Styles */
-.dark-mode {
-  --navbar-bg: #1f2937;
-  --navbar-border: #374151;
-  --navbar-title-color: #f9fafb;
-  --navbar-username-color: #f9fafb;
-  --navbar-username-bg: #374151;
-  --navbar-username-hover: #4b5563;
-  --dropdown-bg: #374151;
-  --dropdown-border: #4b5563;
-  --dropdown-item-color: #f9fafb;
-  --dropdown-item-hover: #4b5563;
-  --dropdown-item-active: #6b7280;
-  --theme-toggle-border: #6b7280;
-  --theme-toggle-bg: #374151;
-  --theme-toggle-hover: #4b5563;
-  --theme-toggle-hover-border: #9ca3af;
-  --logo-filter: invert(1);
-  --navbar-about-color: #f9fafb;
-  --navbar-about-hover: #4b5563;
-  --navbar-about-hover-color: #f9fafb;
-}
-
 /* Ensure navbar text inverts properly in dark mode */
 .dark-mode .navbar-title,
 .dark-mode .theme-toggle {
   filter: invert(1) hue-rotate(180deg);
-}
-
-/* Light Mode Styles (default) */
-:root {
-  --navbar-bg: #ffffff;
-  --navbar-border: #e5e7eb;
-  --navbar-title-color: #1f2937;
-  --navbar-username-color: #374151;
-  --navbar-username-bg: #f3f4f6;
-  --navbar-username-hover: #e5e7eb;
-  --dropdown-bg: #ffffff;
-  --dropdown-border: #e5e7eb;
-  --dropdown-item-color: #374151;
-  --dropdown-item-hover: #f3f4f6;
-  --dropdown-item-active: #e5e7eb;
-  --theme-toggle-border: #374151;
-  --theme-toggle-bg: transparent;
-  --theme-toggle-hover: #f3f4f6;
-  --theme-toggle-hover-border: #6b7280;
-  --logo-filter: none;
-  --navbar-about-color: #374151;
-  --navbar-about-hover: #f3f4f6;
-  --navbar-about-hover-color: #1f2937;
 }
 
 /* Responsive Design */

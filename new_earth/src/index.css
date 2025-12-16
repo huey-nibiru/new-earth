@@ -4,7 +4,7 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: #1f2937;
+  color: #000000;
   background-color: white;
 
   font-synthesis: none;
@@ -19,12 +19,13 @@
   background-color: black;
 }
 
-/* Invert all text and content */
+/* Invert all text and content 
 .dark-mode * {
   filter: invert(1) hue-rotate(180deg);
 }
+  */
 
-/* Preserve images and videos from double inversion */
+/* Preserve images and videos from double inversion 
 .dark-mode img,
 .dark-mode video,
 .dark-mode svg,
@@ -35,7 +36,7 @@
   filter: invert(1) hue-rotate(180deg) !important;
 }
 
-/* Ensure all text elements are properly inverted */
+
 .dark-mode h1,
 .dark-mode h2,
 .dark-mode h3,
@@ -45,7 +46,6 @@
 .dark-mode p,
 .dark-mode div,
 .dark-mode a,
-.dark-mode button,
 .dark-mode input,
 .dark-mode textarea,
 .dark-mode label,
@@ -56,14 +56,14 @@
 .dark-mode th {
   filter: invert(1) hue-rotate(180deg);
 }
-
+*/
 a {
   font-weight: 500;
   color: #1f2937;
   text-decoration: inherit;
 }
 a:hover {
-  color: #dc2626;
+  color: #ff0000;
 }
 
 body {
@@ -84,7 +84,6 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1f2937;
   color: #f9fafb;
   cursor: pointer;
   transition: border-color 0.25s;
