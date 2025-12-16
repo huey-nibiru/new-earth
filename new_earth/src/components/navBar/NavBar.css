@@ -72,6 +72,8 @@
   z-index: 1000;
   overflow: hidden;
   animation: dropdownFadeIn 0.2s ease-out;
+  display: flex;
+  flex-direction: column;
 }
 
 @keyframes dropdownFadeIn {
