@@ -55,6 +55,9 @@ const Faith = () => {
           />
         ))}
       </div>
+      <div className="footer">
+        <p style={{ color: "white" }}></p>
+      </div>
     </div>
   );
 };
