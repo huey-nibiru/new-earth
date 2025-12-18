@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import supabase from "../../services/supabaseClient";
+import Likes from "./likes";
 import "./DataTile.css";
 // used to display content from the database in a grid format
 
@@ -157,6 +158,12 @@ const DataTile = ({ schema = "public", tableName }) => {
                     </span>
                   </div>
                 )}
+                <div
+                  onClick={(e) => e.stopPropagation()}
+                  style={{ marginTop: "8px" }}
+                >
+                  <Likes post={item} schema={schema} tableName={tableName} />
+                </div>
               </div>
             </div>
           );
