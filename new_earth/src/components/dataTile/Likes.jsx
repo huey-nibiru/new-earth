@@ -65,7 +65,7 @@ const Likes = ({ post, schema = "faith_and_worship", tableName = "post" }) => {
     }
 
     // Check for id field - it might be named differently in some schemas
-    const postId = post.id || post.post_id || post.ID;
+    const postId = post.post_id;
     if (!postId) {
       console.error("Post ID is required. Post object:", post);
       return;
@@ -127,7 +127,7 @@ const Likes = ({ post, schema = "faith_and_worship", tableName = "post" }) => {
     return null;
   }
 
-  const postId = post.id || post.post_id || post.ID;
+  const postId = post.post_id;
   if (!postId) {
     return null;
   }
