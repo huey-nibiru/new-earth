@@ -7,22 +7,15 @@ const Faith = () => {
   const POST_TABLE = "post";
   const POST_SCHEMA = "faith_and_worship"; // Change this to your desired schema
 
-  // Array of DataTile configurations - add more entries as needed
   const dataTiles = [
     {
       schema: POST_SCHEMA,
       tableName: POST_TABLE,
     },
-    // Add more DataTiles here:
-    // {
-    //   schema: "faith_and_worship",
-    //   tableName: "another_table",
-    // },
   ];
 
   const handlePostSuccess = (newPost) => {
     console.log("New post created:", newPost);
-    // You can add logic here to refresh the posts list or show a success message
   };
 
   return (
