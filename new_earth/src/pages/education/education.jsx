@@ -23,11 +23,12 @@ const Education = () => {
       <div className="header">
         <h1>Education & Knowledge</h1>
         <p>
-          Educational content (math, science, history, random facts, etc). All knowledge leads back to God.
-          Use this space to share your knowledge with others and learn from others.
-          You can share your thoughts, experiences, and questions with others.
-          You can also ask others for advice or help. You can also share your
-          resources and other educational materials with others.
+          Educational content (math, science, history, random facts, etc). All
+          knowledge leads back to God. Use this space to share your knowledge
+          with others and learn from others. You can share your thoughts,
+          experiences, and questions with others. You can also ask others for
+          advice or help. You can also share your resources and other
+          educational materials with others.
         </p>
       </div>
       <div className="post-container">
