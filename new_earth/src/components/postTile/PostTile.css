@@ -1,9 +1,11 @@
 .data-tile-container {
   width: 100%;
+  max-width: 100%;
   padding: 20px;
   position: relative;
   display: flex;
   justify-content: center;
+  box-sizing: border-box;
 }
 
 .data-tile-overlay {
@@ -266,8 +268,12 @@
   box-shadow: 0 0 6px rgba(255, 215, 0, 0.6);
 }
 
-/* Responsive design */
+/* Responsive design – tablet */
 @media (max-width: 768px) {
+  .data-tile-container {
+    padding: 16px;
+  }
+
   .data-tile-grid {
     gap: 16px;
   }
@@ -275,19 +281,215 @@
   .data-tile {
     max-width: 100%;
     padding: 12px;
+    border-radius: 10px;
+  }
+
+  .data-tile.expanded {
+    width: 85vw;
+    height: 85vh;
+    max-width: 85vw;
+    max-height: 85vh;
+    padding: 20px;
+    border-radius: 12px;
+  }
+
+  .data-tile-close {
+    top: 12px;
+    right: 36px;
   }
 
   .data-tile-content {
     font-size: 0.85rem;
   }
+
+  .data-tile-content.expanded {
+    font-size: 1rem;
+  }
+
+  .data-tile-date {
+    font-size: 0.8rem;
+  }
+
+  .data-tile-username,
+  .data-tile-replies-count {
+    font-size: 0.75rem;
+  }
+
+  .data-tile-loading,
+  .data-tile-error,
+  .data-tile-empty {
+    padding: 24px 16px;
+    font-size: 1rem;
+  }
 }
 
+/* Phone – large */
 @media (max-width: 480px) {
+  .data-tile-container {
+    padding: 12px;
+  }
+
   .data-tile-grid {
     gap: 12px;
   }
 
   .data-tile {
     padding: 10px;
+    border-radius: 8px;
+  }
+
+  .data-tile.expanded {
+    width: 94vw;
+    height: 90vh;
+    max-width: 94vw;
+    max-height: 90vh;
+    padding: 16px;
+    padding-top: 44px;
+    border-radius: 10px;
+  }
+
+  .data-tile-close {
+    top: 10px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+    min-width: 36px;
+    min-height: 36px;
+  }
+
+  .data-tile-content {
+    font-size: 0.8rem;
+    gap: 6px;
+  }
+
+  .data-tile-content.expanded {
+    font-size: 0.95rem;
+    gap: 12px;
+  }
+
+  .data-tile-date {
+    font-size: 0.75rem;
+    margin-bottom: 6px;
+    padding-bottom: 6px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 0.25em;
+  }
+
+  .data-tile-username,
+  .data-tile-replies-count {
+    font-size: 0.7rem;
+  }
+
+  .data-tile-loading,
+  .data-tile-error,
+  .data-tile-empty {
+    padding: 20px 12px;
+    font-size: 0.95rem;
+  }
+
+  .post-reply-toggle-button {
+    padding: 8px 14px;
+    font-size: 0.85rem;
+  }
+}
+
+/* Phone – small (e.g. iPhone SE, narrow devices) */
+@media (max-width: 390px) {
+  .data-tile-container {
+    padding: 8px;
+  }
+
+  .data-tile-grid {
+    gap: 10px;
+  }
+
+  .data-tile {
+    padding: 8px;
+    border-radius: 6px;
+  }
+
+  .data-tile.expanded {
+    width: 96vw;
+    height: 92vh;
+    max-width: 96vw;
+    max-height: 92vh;
+    padding: 12px;
+    padding-top: 40px;
+    border-radius: 8px;
+  }
+
+  .data-tile-close {
+    top: 8px;
+    right: 8px;
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+    min-width: 32px;
+    min-height: 32px;
+  }
+
+  .data-tile-content {
+    font-size: 0.78rem;
+  }
+
+  .data-tile-content.expanded {
+    font-size: 0.9rem;
+  }
+
+  .data-tile-date {
+    font-size: 0.7rem;
+  }
+
+  .data-tile-username,
+  .data-tile-replies-count {
+    font-size: 0.65rem;
+  }
+
+  .data-tile-loading,
+  .data-tile-error,
+  .data-tile-empty {
+    padding: 16px 10px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Phone – very small (320px) */
+@media (max-width: 320px) {
+  .data-tile-container {
+    padding: 6px;
+  }
+
+  .data-tile-grid {
+    gap: 8px;
+  }
+
+  .data-tile {
+    padding: 6px;
+    border-radius: 6px;
+  }
+
+  .data-tile.expanded {
+    width: 98vw;
+    height: 95vh;
+    max-width: 98vw;
+    max-height: 95vh;
+    padding: 10px;
+    padding-top: 36px;
+  }
+
+  .data-tile-close {
+    top: 6px;
+    right: 6px;
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+    min-width: 28px;
+    min-height: 28px;
+  }
+
+  .data-tile-content.expanded {
+    font-size: 0.85rem;
   }
 }
