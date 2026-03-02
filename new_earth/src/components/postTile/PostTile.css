@@ -138,6 +138,12 @@
   font-size: 0.8rem;
 }
 
+.data-tile-replies-count {
+  color: rgba(255, 215, 0, 0.7);
+  font-weight: 400;
+  font-size: 0.8rem;
+}
+
 .data-tile-label {
   font-weight: 600;
   color: rgba(255, 215, 0, 0.9);

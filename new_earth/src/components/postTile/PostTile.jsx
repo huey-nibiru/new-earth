@@ -10,7 +10,7 @@ const PostTile = ({ schema = "public", tableName }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [expandedTileId, setExpandedTileId] = useState(null);
-  const [replyingPostId, setReplyingPostId] = useState(null);
+  const [replyCounts, setReplyCounts] = useState({});
 
   // Format date to mm/dd/yyyy hh:mm
   const formatDate = (dateString) => {
@@ -57,6 +57,48 @@ const PostTile = ({ schema = "public", tableName }) => {
 
     fetchData();
   }, [schema, tableName]);
+
+  // Fetch reply counts for all posts shown in this tile list
+  useEffect(() => {
+    const loadReplyCounts = async () => {
+      try {
+        const postIds = Array.from(
+          new Set(
+            (data || [])
+              .map((item) => item.post_id ?? item.id)
+              .filter((id) => id !== null && id !== undefined),
+          ),
+        );
+
+        if (postIds.length === 0) {
+          setReplyCounts({});
+          return;
+        }
+
+        const { data: replies, error: repliesError } = await supabase
+          .schema("faith_and_worship")
+          .from("replies")
+          .select("post_id");
+
+        if (repliesError) {
+          throw repliesError;
+        }
+
+        const counts = {};
+        (replies || []).forEach((reply) => {
+          const pid = reply.post_id;
+          if (!postIds.includes(pid)) return;
+          counts[pid] = (counts[pid] || 0) + 1;
+        });
+
+        setReplyCounts(counts);
+      } catch (err) {
+        console.error("Error fetching reply counts:", err);
+      }
+    };
+
+    loadReplyCounts();
+  }, [data]);
 
   // Prevent body scroll when tile is expanded
   useEffect(() => {
@@ -146,6 +188,14 @@ const PostTile = ({ schema = "public", tableName }) => {
                         • {item.username}
                       </span>
                     )}
+                    {postId != null &&
+                      typeof replyCounts[postId] === "number" && (
+                        <span className="data-tile-replies-count">
+                          {" "}
+                          • {replyCounts[postId]}{" "}
+                          {replyCounts[postId] === 1 ? "reply" : "replies"}
+                        </span>
+                      )}
                   </div>
                 )}
                 {content &&
@@ -162,30 +212,7 @@ const PostTile = ({ schema = "public", tableName }) => {
                     </span>
                   </div>
                 )}
-                {postId && (
-                  <>
-                    <button
-                      type="button"
-                      className="post-reply-toggle-button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        if (!isExpanded) {
-                          setExpandedTileId(tileKey);
-                        }
-                        setReplyingPostId((current) =>
-                          current === postId && isExpanded ? null : postId,
-                        );
-                      }}
-                    >
-                      {isExpanded && replyingPostId === postId
-                        ? "Hide replies"
-                        : "Reply"}
-                    </button>
-                    {isExpanded && replyingPostId === postId && (
-                      <ReplyTile postId={postId} />
-                    )}
-                  </>
-                )}
+                {isExpanded && postId && <ReplyTile postId={postId} />}
               </div>
             </div>
           );
