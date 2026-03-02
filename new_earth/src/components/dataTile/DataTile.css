@@ -2,6 +2,8 @@
   width: 100%;
   padding: 20px;
   position: relative;
+  display: flex;
+  justify-content: center;
 }
 
 .data-tile-overlay {
@@ -16,14 +18,16 @@
 }
 
 .data-tile-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 20px;
   width: 100%;
 }
 
 .data-tile {
-  aspect-ratio: 1;
+  width: 100%;
+  max-width: 800px;
   background: #1a1a1a;
   border-radius: 12px;
   padding: 16px;
@@ -238,11 +242,11 @@
 /* Responsive design */
 @media (max-width: 768px) {
   .data-tile-grid {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 16px;
   }
 
   .data-tile {
+    max-width: 100%;
     padding: 12px;
   }
 
@@ -253,7 +257,6 @@
 
 @media (max-width: 480px) {
   .data-tile-grid {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 12px;
   }
 
