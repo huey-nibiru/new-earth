@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import supabase from "../../services/supabaseClient";
+import ReplyTile from "../replyTile/ReplyTile";
 
-import "./DataTile.css";
+import "./PostTile.css";
 // used to display content from the database in a grid format
 
-const DataTile = ({ schema = "public", tableName }) => {
+const PostTile = ({ schema = "public", tableName }) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -107,6 +108,7 @@ const DataTile = ({ schema = "public", tableName }) => {
           const formattedDate = formatDate(item.created_at);
 
           const isExpanded = expandedTileId === (item.id || index);
+          const postId = item.id;
 
           return (
             <div
@@ -158,6 +160,10 @@ const DataTile = ({ schema = "public", tableName }) => {
                     </span>
                   </div>
                 )}
+                {schema === "faith_and_worship" &&
+                  tableName === "post" &&
+                  isExpanded &&
+                  postId && <ReplyTile postId={postId} />}
               </div>
             </div>
           );
@@ -167,4 +173,4 @@ const DataTile = ({ schema = "public", tableName }) => {
   );
 };
 
-export default DataTile;
+export default PostTile;

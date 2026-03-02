@@ -1,6 +1,6 @@
 import "./faith.css";
 import Post from "../../components/post/Post";
-import DataTile from "../../components/dataTile/DataTile";
+import PostTile from "../../components/postTile/PostTile";
 
 const Faith = () => {
   // Configure your database table and schema here
@@ -40,7 +40,7 @@ const Faith = () => {
       </div>
       <div className="data-tiles-container">
         {dataTiles.map((tile, index) => (
-          <DataTile
+          <PostTile
             key={`${tile.schema}-${tile.tableName}-${index}`}
             schema={tile.schema}
             tableName={tile.tableName}
