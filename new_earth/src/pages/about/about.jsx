@@ -36,26 +36,14 @@ const About = () => {
           NonChristian who is for the first time interested in learning the True
           path of our Lord Jesus Christ, you're welcome here.
         </p>
-        <p>
-          New Earth is a centralized hub for exploring Christian thought across
-          12 key life domains. The navigation hub featuring a central gold cross
-          icon surrounded by 12 navigation points represents a different aspect
-          of life. A click on the central cross will route you to the Bible.
-        </p>
 
         <p>
-          Each section has its own theme but remains interconnected with the
-          other sections. Dial in to your expertise and share insights,
-          experiences, and strategies. Ask questions that intrigue you and
-          receive answers from others.{" "}
-        </p>
-        <p>
-          <strong>12 Core Sections</strong>
+          <strong>Common Areas of Focus</strong>
         </p>
         <ol>
           <li>
-            <strong>Faith & Worship</strong> - Share life experience, tips on
-            handling faith, and prayers.{" "}
+            <strong>Faith & Worship</strong> - Share life experience, faith, and
+            prayer.{" "}
           </li>
           <li>
             <strong>Education & Knowledge</strong> - Educational content (math,
@@ -63,14 +51,16 @@ const About = () => {
             God.{" "}
           </li>
           <li>
-            <strong>Family & Community Life</strong> - Family-focused resources{" "}
+            <strong>Family & Community Life</strong> - Family-focused
+            resources{" "}
           </li>
           <li>
             <strong>Governance & Justice</strong> - Governance and legal
             information{" "}
           </li>
           <li>
-            <strong>Economy & Work</strong> - Economic and employment resources{" "}
+            <strong>Economy & Work</strong> - Economic and employment
+            resources{" "}
           </li>
           <li>
             <strong>Health & Well-being</strong> - Share diet, gym routines,
@@ -85,7 +75,8 @@ const About = () => {
             collaboration{" "}
           </li>
           <li>
-            <strong>Art & Music</strong> - Creative content and artistic works{" "}
+            <strong>Art & Music</strong> - Creative content and artistic
+            works{" "}
           </li>
           <li>
             <strong>Service & Charity</strong> - Post available services and

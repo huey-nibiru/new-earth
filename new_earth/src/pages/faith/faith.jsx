@@ -21,7 +21,6 @@ const Faith = () => {
   return (
     <div>
       <div className="header">
-        <h1>Faith & Worship</h1>
         <p>
           When you're new to faith, it can be hard to know where to start. Use
           this space to share your journey with others and learn from others.
