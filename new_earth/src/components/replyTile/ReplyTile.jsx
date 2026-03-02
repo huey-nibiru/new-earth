@@ -112,18 +112,12 @@ const ReplyTile = ({ postId }) => {
         {replies.map((reply) => {
           const replyDate = formatDate(reply.created_at);
           return (
-            <div
-              key={reply.reply_id || reply.id}
-              className="post-reply"
-            >
+            <div key={reply.reply_id || reply.id} className="post-reply">
               {replyDate && (
                 <div className="post-reply-meta">
                   {replyDate}
                   {reply.user_id && (
-                    <span className="post-reply-user">
-                      {" "}
-                      • {reply.user_id}
-                    </span>
+                    <span className="post-reply-user"> • {reply.user_id}</span>
                   )}
                 </div>
               )}
@@ -156,4 +150,3 @@ const ReplyTile = ({ postId }) => {
 };
 
 export default ReplyTile;
-

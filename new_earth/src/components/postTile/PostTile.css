@@ -239,6 +239,27 @@
   color: #ff6b6b;
 }
 
+.post-reply-toggle-button {
+  margin-top: 8px;
+  align-self: flex-start;
+  padding: 4px 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 215, 0, 0.7);
+  background: transparent;
+  color: rgba(255, 215, 0, 0.9);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.post-reply-toggle-button:hover {
+  background: rgba(255, 215, 0, 0.15);
+  box-shadow: 0 0 6px rgba(255, 215, 0, 0.6);
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
   .data-tile-grid {

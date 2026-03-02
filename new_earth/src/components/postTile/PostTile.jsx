@@ -10,6 +10,7 @@ const PostTile = ({ schema = "public", tableName }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [expandedTileId, setExpandedTileId] = useState(null);
+  const [replyingPostId, setReplyingPostId] = useState(null);
 
   // Format date to mm/dd/yyyy hh:mm
   const formatDate = (dateString) => {
@@ -107,12 +108,13 @@ const PostTile = ({ schema = "public", tableName }) => {
           const content = item.content;
           const formattedDate = formatDate(item.created_at);
 
-          const isExpanded = expandedTileId === (item.id || index);
-          const postId = item.id;
+          const postId = item.post_id ?? item.id ?? null;
+          const tileKey = postId ?? index;
+          const isExpanded = expandedTileId === tileKey;
 
           return (
             <div
-              key={item.id || index}
+              key={tileKey}
               className={`data-tile ${isExpanded ? "expanded" : ""}`}
             >
               {isExpanded && (
@@ -131,7 +133,7 @@ const PostTile = ({ schema = "public", tableName }) => {
                 className={`data-tile-content ${isExpanded ? "expanded" : ""}`}
                 onClick={() => {
                   if (!isExpanded) {
-                    setExpandedTileId(item.id || index);
+                    setExpandedTileId(tileKey);
                   }
                 }}
               >
@@ -160,10 +162,30 @@ const PostTile = ({ schema = "public", tableName }) => {
                     </span>
                   </div>
                 )}
-                {schema === "faith_and_worship" &&
-                  tableName === "post" &&
-                  isExpanded &&
-                  postId && <ReplyTile postId={postId} />}
+                {postId && (
+                  <>
+                    <button
+                      type="button"
+                      className="post-reply-toggle-button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        if (!isExpanded) {
+                          setExpandedTileId(tileKey);
+                        }
+                        setReplyingPostId((current) =>
+                          current === postId && isExpanded ? null : postId,
+                        );
+                      }}
+                    >
+                      {isExpanded && replyingPostId === postId
+                        ? "Hide replies"
+                        : "Reply"}
+                    </button>
+                    {isExpanded && replyingPostId === postId && (
+                      <ReplyTile postId={postId} />
+                    )}
+                  </>
+                )}
               </div>
             </div>
           );
