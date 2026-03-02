@@ -24,14 +24,9 @@ const CentralHub = () => {
       {/* Central gold cross with glowing circle */}
       <div className="central-element">
         <div className="glowing-circle">
-          <a
-            href="https://www.bible.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="gold-cross-link"
-          >
+          <Link to="/faith-and-worship" className="gold-cross-link">
             <img src={goldCross} alt="Gold Cross" className="gold-cross" />
-          </a>
+          </Link>
         </div>
       </div>
 
