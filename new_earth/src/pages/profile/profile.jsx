@@ -165,10 +165,7 @@ const Profile = () => {
                 <span className="info-label">Email:</span>
                 <span className="info-value">{user.email || "N/A"}</span>
               </div>
-              <div className="info-item">
-                <span className="info-label">User ID:</span>
-                <span className="info-value user-id">{user.id}</span>
-              </div>
+
               <div className="info-item">
                 <span className="info-label">Account Created:</span>
                 <span className="info-value">

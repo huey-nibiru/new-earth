@@ -59,7 +59,7 @@
 }
 
 .post-reply-input {
-  width: 100%;
+  width: 50%;
   min-height: 60px;
   max-height: 120px;
   resize: vertical;
@@ -87,7 +87,10 @@
   font-weight: 600;
   font-size: 0.85rem;
   cursor: pointer;
-  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    opacity 0.15s ease;
 }
 
 .post-reply-submit:disabled {
@@ -100,4 +103,3 @@
   transform: translateY(-1px);
   box-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
 }
-
