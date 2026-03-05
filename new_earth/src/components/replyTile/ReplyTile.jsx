@@ -72,6 +72,11 @@ const ReplyTile = ({ postId }) => {
         return;
       }
 
+      const userName =
+        user.user_metadata?.username ||
+        user.email?.split("@")[0] ||
+        "Anonymous";
+
       const { error: insertError } = await supabase
         .schema("faith_and_worship")
         .from("replies")
@@ -80,6 +85,7 @@ const ReplyTile = ({ postId }) => {
             reply_text: text,
             post_id: postId,
             user_id: user.id,
+            username: userName,
             created_at: new Date().toISOString(),
           },
         ]);
@@ -116,8 +122,11 @@ const ReplyTile = ({ postId }) => {
               {replyDate && (
                 <div className="post-reply-meta">
                   {replyDate}
-                  {reply.user_id && (
-                    <span className="post-reply-user"> • {reply.user_id}</span>
+                  {(reply.username || reply.user_id) && (
+                    <span className="post-reply-user">
+                      {" "}
+                      • {reply.username || reply.user_id}
+                    </span>
                   )}
                 </div>
               )}

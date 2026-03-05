@@ -5,7 +5,7 @@ import ReplyTile from "../replyTile/ReplyTile";
 import "./PostTile.css";
 // used to display content from the database in a grid format
 
-const PostTile = ({ schema = "public", tableName }) => {
+const PostTile = ({ schema = "public", tableName, refreshKey = 0 }) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -56,7 +56,7 @@ const PostTile = ({ schema = "public", tableName }) => {
     };
 
     fetchData();
-  }, [schema, tableName]);
+  }, [schema, tableName, refreshKey]);
 
   // Fetch reply counts for all posts shown in this tile list
   useEffect(() => {
