@@ -5,10 +5,73 @@ import "./profile.css";
 const Profile = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [postCount, setPostCount] = useState(0);
+  const [userPosts, setUserPosts] = useState([]);
   const [error, setError] = useState("");
 
   useEffect(() => {
+    const fetchUserPostsAndReplies = async (userId) => {
+      const schemas = ["faith_and_worship", "public"];
+      const collectedPosts = [];
+
+      for (const schema of schemas) {
+        const { data: posts, error: postsError } = await supabase
+          .schema(schema)
+          .from("post")
+          .select("*")
+          .eq("user_id", userId)
+          .order("created_at", { ascending: false });
+
+        if (postsError) {
+          console.error(`Error fetching posts from ${schema}:`, postsError);
+          continue;
+        }
+
+        (posts || []).forEach((post) => {
+          collectedPosts.push({
+            ...post,
+            post_id: post.post_id ?? post.id,
+            schema,
+            replies: [],
+          });
+        });
+      }
+
+      const postIds = collectedPosts
+        .map((post) => post.post_id)
+        .filter((postId) => postId !== null && postId !== undefined);
+
+      if (postIds.length > 0) {
+        const { data: replies, error: repliesError } = await supabase
+          .schema("faith_and_worship")
+          .from("replies")
+          .select("*")
+          .in("post_id", postIds)
+          .order("created_at", { ascending: true });
+
+        if (repliesError) {
+          console.error("Error fetching replies:", repliesError);
+        } else {
+          const repliesByPostId = {};
+          (replies || []).forEach((reply) => {
+            if (!repliesByPostId[reply.post_id]) {
+              repliesByPostId[reply.post_id] = [];
+            }
+            repliesByPostId[reply.post_id].push(reply);
+          });
+
+          collectedPosts.forEach((post) => {
+            post.replies = repliesByPostId[post.post_id] || [];
+          });
+        }
+      }
+
+      collectedPosts.sort(
+        (a, b) =>
+          new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
+      );
+      setUserPosts(collectedPosts);
+    };
+
     // Get initial session
     const fetchUserData = async () => {
       try {
@@ -22,29 +85,9 @@ const Profile = () => {
 
         if (session?.user) {
           setUser(session.user);
-
-          // Fetch post count from various schemas
-          try {
-            const schemas = ["faith_and_worship", "public"];
-            let totalPosts = 0;
-
-            for (const schema of schemas) {
-              const { count, error: countError } = await supabase
-                .schema(schema)
-                .from("post")
-                .select("*", { count: "exact", head: true })
-                .eq("user_id", session.user.id);
-
-              if (!countError && count) {
-                totalPosts += count;
-              }
-            }
-
-            setPostCount(totalPosts);
-          } catch (err) {
-            console.error("Error fetching post count:", err);
-            // Don't set error state for post count, just log it
-          }
+          await fetchUserPostsAndReplies(session.user.id);
+        } else {
+          setUserPosts([]);
         }
       } catch (err) {
         setError(err.message || "Failed to load profile");
@@ -62,32 +105,9 @@ const Profile = () => {
     } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null);
       if (session?.user) {
-        // Fetch post count when user changes
-        const fetchPostCount = async () => {
-          try {
-            const schemas = ["faith_and_worship", "public"];
-            let totalPosts = 0;
-
-            for (const schema of schemas) {
-              const { count, error: countError } = await supabase
-                .schema(schema)
-                .from("post")
-                .select("*", { count: "exact", head: true })
-                .eq("user_id", session.user.id);
-
-              if (!countError && count) {
-                totalPosts += count;
-              }
-            }
-
-            setPostCount(totalPosts);
-          } catch (err) {
-            console.error("Error fetching post count:", err);
-          }
-        };
-        fetchPostCount();
+        fetchUserPostsAndReplies(session.user.id);
       } else {
-        setPostCount(0);
+        setUserPosts([]);
       }
     });
 
@@ -102,6 +122,17 @@ const Profile = () => {
       month: "long",
       day: "numeric",
     });
+  };
+
+  const formatDateTime = (dateString) => {
+    if (!dateString) return "N/A";
+    const date = new Date(dateString);
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    const year = date.getFullYear();
+    const hours = String(date.getHours()).padStart(2, "0");
+    const minutes = String(date.getMinutes()).padStart(2, "0");
+    return `${hours}:${minutes} ${month}/${day}/${year}`;
   };
 
   const getDisplayName = () => {
@@ -176,10 +207,54 @@ const Profile = () => {
 
             <div className="info-section">
               <h3>Activity</h3>
-              <div className="info-item">
-                <span className="info-label">Total Posts:</span>
-                <span className="info-value highlight">{postCount}</span>
-              </div>
+              {userPosts.length === 0 ? (
+                <p className="profile-empty-activity">No posts yet.</p>
+              ) : (
+                <div className="profile-posts-list">
+                  {userPosts.map((post, index) => (
+                    <div
+                      key={post.post_id ?? `${post.schema}-${index}`}
+                      className="profile-post-item"
+                    >
+                      <div className="profile-post-meta">
+                        <span>{formatDateTime(post.created_at)}</span>
+                        <span className="profile-post-schema">
+                          {post.schema}
+                        </span>
+                      </div>
+                      <div className="profile-post-content">{post.content}</div>
+
+                      <div className="profile-replies-block">
+                        <h4>Replies ({post.replies.length})</h4>
+                        {post.replies.length === 0 ? (
+                          <p className="profile-empty-replies">
+                            No replies yet.
+                          </p>
+                        ) : (
+                          <div className="profile-replies-list">
+                            {post.replies.map((reply) => (
+                              <div
+                                key={reply.reply_id ?? reply.id}
+                                className="profile-reply-item"
+                              >
+                                <div className="profile-reply-meta">
+                                  <span>
+                                    {formatDateTime(reply.created_at)}
+                                  </span>
+                                  <span>{reply.username || "Anonymous"}</span>
+                                </div>
+                                <div className="profile-reply-text">
+                                  {reply.reply_text}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>
