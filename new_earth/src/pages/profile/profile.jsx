@@ -206,7 +206,7 @@ const Profile = () => {
             </div>
 
             <div className="info-section">
-              <h3>Activity</h3>
+              <h3>Posts</h3>
               {userPosts.length === 0 ? (
                 <p className="profile-empty-activity">No posts yet.</p>
               ) : (
@@ -218,9 +218,7 @@ const Profile = () => {
                     >
                       <div className="profile-post-meta">
                         <span>{formatDateTime(post.created_at)}</span>
-                        <span className="profile-post-schema">
-                          {post.schema}
-                        </span>
+                        <span className="profile-post-schema"></span>
                       </div>
                       <div className="profile-post-content">{post.content}</div>
 
