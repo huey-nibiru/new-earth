@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import supabase from "../../services/supabaseClient";
+import { enrichPostHtml } from "../../utils/enrichPostHtml";
 import ReplyTile from "../replyTile/ReplyTile";
+import "../post/postRichContent.css";
 
 import "./PostTile.css";
 // used to display content from the database in a grid format
@@ -198,20 +200,14 @@ const PostTile = ({ schema = "public", tableName, refreshKey = 0 }) => {
                       )}
                   </div>
                 )}
-                {content &&
-                typeof content === "string" &&
-                content.includes("<") ? (
+                {content && typeof content === "string" ? (
                   <div
-                    className="data-tile-field data-tile-html"
-                    dangerouslySetInnerHTML={{ __html: content }}
+                    className="data-tile-field data-tile-html post-rich-content"
+                    dangerouslySetInnerHTML={{
+                      __html: enrichPostHtml(content),
+                    }}
                   />
-                ) : (
-                  <div className="data-tile-field">
-                    <span className="data-tile-value">
-                      {content ? String(content) : ""}
-                    </span>
-                  </div>
-                )}
+                ) : null}
                 {isExpanded && postId && <ReplyTile postId={postId} />}
               </div>
             </div>

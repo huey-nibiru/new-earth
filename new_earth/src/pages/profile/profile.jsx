@@ -1,5 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import supabase from "../../services/supabaseClient";
+import { enrichPostHtml } from "../../utils/enrichPostHtml";
+import "../../components/post/postRichContent.css";
 import "./profile.css";
 
 const Profile = () => {
@@ -301,7 +303,12 @@ const Profile = () => {
                           </button>
                         </span>
                       </div>
-                      <div className="profile-post-content">{post.content}</div>
+                      <div
+                        className="profile-post-content post-rich-content"
+                        dangerouslySetInnerHTML={{
+                          __html: enrichPostHtml(post.content || ""),
+                        }}
+                      />
 
                       <div className="profile-replies-block">
                         <h4>Replies ({post.replies.length})</h4>

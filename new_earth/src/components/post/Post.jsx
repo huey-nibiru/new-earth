@@ -1,5 +1,6 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import supabase from "../../services/supabaseClient";
+import { enrichPostHtml } from "../../utils/enrichPostHtml";
 import "./Post.css";
 
 const Post = ({ tableName, schema = "public", onPostSuccess }) => {
@@ -48,9 +49,7 @@ const Post = ({ tableName, schema = "public", onPostSuccess }) => {
         return;
       }
 
-      // Get plain text and HTML content
-      //const plainText = editorRef.current.innerText;
-      const htmlContent = editorRef.current.innerHTML;
+      const htmlContent = enrichPostHtml(editorRef.current.innerHTML);
 
       // Get display_name from user metadata
       const userName =
