@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import supabase from "../../services/supabaseClient";
 
 const AuthForm = () => {
-  const [mode, setMode] = useState("login"); // "login" | "signup"
+  const [mode, setMode] = useState("login"); // "login" | "signup" | "forgot"
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -11,8 +11,18 @@ const AuthForm = () => {
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
 
+  const resetPasswordRedirect = () =>
+    `${window.location.origin}/reset-password`;
+
   const toggleMode = () => {
     setMode((prev) => (prev === "login" ? "signup" : "login"));
+    setError("");
+    setMessage("");
+    setConfirmPassword("");
+  };
+
+  const goToLogin = () => {
+    setMode("login");
     setError("");
     setMessage("");
     setConfirmPassword("");
@@ -24,7 +34,16 @@ const AuthForm = () => {
     setError("");
     setMessage("");
     try {
-      if (mode === "login") {
+      if (mode === "forgot") {
+        const { error: resetError } = await supabase.auth.resetPasswordForEmail(
+          email,
+          { redirectTo: resetPasswordRedirect() }
+        );
+        if (resetError) throw resetError;
+        setMessage(
+          "If an account exists for this email, you will receive a link to sign in and set a new password."
+        );
+      } else if (mode === "login") {
         const { error: signInError } = await supabase.auth.signInWithPassword({
           email,
           password,
@@ -112,30 +131,72 @@ const AuthForm = () => {
 
   return (
     <div style={{ width: "100%", maxWidth: 360, margin: "0 auto" }}>
-      <div
-        style={{ display: "flex", justifyContent: "center", marginBottom: 12 }}
-      >
-        <button
-          onClick={toggleMode}
-          style={{
-            background: "transparent",
-            border: "1px solid gold",
-            color: "gold",
-            padding: "6px 12px",
-            borderRadius: 6,
-            cursor: "pointer",
-          }}
+      {mode !== "forgot" && (
+        <div
+          style={{ display: "flex", justifyContent: "center", marginBottom: 12 }}
         >
-          {mode === "login"
-            ? "Need an account? Sign up"
-            : "Have an account? Log in"}
-        </button>
-      </div>
+          <button
+            type="button"
+            onClick={toggleMode}
+            style={{
+              background: "transparent",
+              border: "1px solid gold",
+              color: "gold",
+              padding: "6px 12px",
+              borderRadius: 6,
+              cursor: "pointer",
+            }}
+          >
+            {mode === "login"
+              ? "Need an account? Sign up"
+              : "Have an account? Log in"}
+          </button>
+        </div>
+      )}
+
+      {mode === "forgot" && (
+        <div
+          style={{ display: "flex", justifyContent: "center", marginBottom: 12 }}
+        >
+          <button
+            type="button"
+            onClick={goToLogin}
+            style={{
+              background: "transparent",
+              border: "1px solid gold",
+              color: "gold",
+              padding: "6px 12px",
+              borderRadius: 6,
+              cursor: "pointer",
+            }}
+          >
+            Back to log in
+          </button>
+        </div>
+      )}
 
       <form onSubmit={handleSubmit} style={{ display: "grid", gap: 10 }}>
         <h3 style={{ color: "gold", textAlign: "center", margin: 0 }}>
-          {mode === "login" ? "Login" : "Sign Up"}
+          {mode === "login"
+            ? "Login"
+            : mode === "signup"
+            ? "Sign Up"
+            : "Forgot password"}
         </h3>
+        {mode === "forgot" && (
+          <p
+            style={{
+              color: "#aaa",
+              fontSize: 13,
+              textAlign: "center",
+              margin: 0,
+              lineHeight: 1.4,
+            }}
+          >
+            Enter your email and we will send you a link to sign in and choose a
+            new password.
+          </p>
+        )}
         <input
           type="email"
           placeholder="Email"
@@ -150,24 +211,26 @@ const AuthForm = () => {
             color: "#eee",
           }}
         />
-        <div style={{ position: "relative" }}>
-          <input
-            type={showPassword ? "text" : "password"}
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            style={{
-              padding: 10,
-              borderRadius: 6,
-              border: "1px solid #444",
-              background: "#111",
-              color: "#eee",
-              width: "100%",
-              boxSizing: "border-box",
-            }}
-          />
-        </div>
+        {mode !== "forgot" && (
+          <div style={{ position: "relative" }}>
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              style={{
+                padding: 10,
+                borderRadius: 6,
+                border: "1px solid #444",
+                background: "#111",
+                color: "#eee",
+                width: "100%",
+                boxSizing: "border-box",
+              }}
+            />
+          </div>
+        )}
         {mode === "signup" && (
           <div style={{ position: "relative" }}>
             <input
@@ -188,36 +251,61 @@ const AuthForm = () => {
             />
           </div>
         )}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 8,
-            fontSize: 14,
-          }}
-        >
-          <input
-            type="checkbox"
-            id="showPassword"
-            checked={showPassword}
-            onChange={(e) => setShowPassword(e.target.checked)}
+        {mode !== "forgot" && (
+          <div
             style={{
-              cursor: "pointer",
-              width: 16,
-              height: 16,
-            }}
-          />
-          <label
-            htmlFor="showPassword"
-            style={{
-              color: "#eee",
-              cursor: "pointer",
-              userSelect: "none",
+              display: "flex",
+              alignItems: "center",
+              gap: 8,
+              fontSize: 14,
             }}
           >
-            Show password
-          </label>
-        </div>
+            <input
+              type="checkbox"
+              id="showPassword"
+              checked={showPassword}
+              onChange={(e) => setShowPassword(e.target.checked)}
+              style={{
+                cursor: "pointer",
+                width: 16,
+                height: 16,
+              }}
+            />
+            <label
+              htmlFor="showPassword"
+              style={{
+                color: "#eee",
+                cursor: "pointer",
+                userSelect: "none",
+              }}
+            >
+              Show password
+            </label>
+          </div>
+        )}
+        {mode === "login" && (
+          <div style={{ textAlign: "center" }}>
+            <button
+              type="button"
+              onClick={() => {
+                setMode("forgot");
+                setError("");
+                setMessage("");
+              }}
+              style={{
+                background: "none",
+                border: "none",
+                color: "#9be7ff",
+                cursor: "pointer",
+                fontSize: 14,
+                textDecoration: "underline",
+                padding: 0,
+              }}
+            >
+              Forgot password?
+            </button>
+          </div>
+        )}
         <button
           type="submit"
           disabled={loading}
@@ -235,7 +323,9 @@ const AuthForm = () => {
             ? "Please wait..."
             : mode === "login"
             ? "Log In"
-            : "Create Account"}
+            : mode === "signup"
+            ? "Create Account"
+            : "Send email link"}
         </button>
 
         {error && (

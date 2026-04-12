@@ -81,14 +81,23 @@ const Navbar = () => {
   };
 
   const handleSignOut = async () => {
-    try {
-      const { error } = await supabase.auth.signOut();
-      if (error) throw error;
-      setIsDropdownOpen(false);
-      navigate("/");
-    } catch (error) {
-      console.error("Error signing out:", error.message);
+    setIsDropdownOpen(false);
+    // Use explicit "local" scope: default "global" can fail (403, cookie issues) or
+    // break in production when bundlers rewrite the identifier `global`.
+    const { error } = await supabase.auth.signOut({ scope: "local" });
+    if (error) {
+      console.warn("Sign out request failed, clearing session in browser:", error.message);
+      try {
+        for (const key of Object.keys(localStorage)) {
+          if (key.endsWith("-auth-token")) localStorage.removeItem(key);
+        }
+      } catch {
+        /* ignore */
+      }
+      window.location.assign("/");
+      return;
     }
+    navigate("/");
   };
 
   const toggleDropdown = () => {

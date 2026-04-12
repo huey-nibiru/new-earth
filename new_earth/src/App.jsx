@@ -8,6 +8,7 @@ import Profile from "./pages/profile/profile";
 import About from "./pages/about/about";
 import Navbar from "./components/navBar/NavBar";
 import Home from "./pages/home/home";
+import ResetPassword from "./pages/resetPassword/ResetPassword";
 
 import "./App.css";
 
@@ -45,6 +46,7 @@ function App() {
 
           <Route path="/settings" element={<Settings />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
         </Routes>
       </div>
     </Router>
