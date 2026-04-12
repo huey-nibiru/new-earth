@@ -86,7 +86,10 @@ const Navbar = () => {
     // break in production when bundlers rewrite the identifier `global`.
     const { error } = await supabase.auth.signOut({ scope: "local" });
     if (error) {
-      console.warn("Sign out request failed, clearing session in browser:", error.message);
+      console.warn(
+        "Sign out request failed, clearing session in browser:",
+        error.message,
+      );
       try {
         for (const key of Object.keys(localStorage)) {
           if (key.endsWith("-auth-token")) localStorage.removeItem(key);
@@ -114,6 +117,9 @@ const Navbar = () => {
             className="navbar-logo"
           />
         </a>
+        <Link to="/" className="navbar-home-link">
+          Home
+        </Link>
         <Link to="/about" className="navbar-about-link">
           About
         </Link>
