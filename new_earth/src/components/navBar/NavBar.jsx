@@ -117,7 +117,7 @@ const Navbar = () => {
             className="navbar-logo"
           />
         </a>
-        <Link to="/" className="navbar-home-link">
+        <Link to="/" className="navbar-about-link">
           Home
         </Link>
         <Link to="/about" className="navbar-about-link">
