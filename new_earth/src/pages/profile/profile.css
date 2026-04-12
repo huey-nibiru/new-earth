@@ -149,6 +149,37 @@
   text-transform: capitalize;
 }
 
+.profile-post-meta-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.profile-post-delete {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.55rem;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 107, 107, 0.55);
+  background: rgba(255, 107, 107, 0.12);
+  color: #ff8a8a;
+  cursor: pointer;
+  font-family: inherit;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.profile-post-delete:hover:not(:disabled) {
+  background: rgba(255, 107, 107, 0.22);
+  border-color: rgba(255, 107, 107, 0.85);
+}
+
+.profile-post-delete:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
 .profile-post-content {
   margin-top: 0.6rem;
   color: #eee;

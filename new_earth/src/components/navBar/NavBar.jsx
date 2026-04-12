@@ -98,7 +98,7 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-left">
-        <a href="/">
+        <a href="/faith-and-worship">
           <img
             src={goldCross}
             alt="Gold Cross of Life"

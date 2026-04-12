@@ -34,6 +34,7 @@
   border-radius: 8px;
   padding: 8px 10px;
   margin-left: 4px;
+  width: 90%;
 }
 
 .post-reply-meta {
@@ -59,7 +60,7 @@
 }
 
 .post-reply-input {
-  width: 50%;
+  width: 90%;
   min-height: 60px;
   max-height: 120px;
   resize: vertical;
@@ -78,7 +79,7 @@
 }
 
 .post-reply-submit {
-  align-self: flex-end;
+  align-self: flex-start;
   padding: 6px 14px;
   border-radius: 20px;
   border: none;

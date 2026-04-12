@@ -54,7 +54,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: 70vw;
-  height: 70vh;
+  height: 50vh;
   max-width: 70vw;
   max-height: 70vh;
   aspect-ratio: unset;
@@ -128,22 +128,24 @@
 .data-tile-date {
   font-weight: 600;
   color: rgba(255, 215, 0, 0.9);
-  font-size: 0.85rem;
-  margin-bottom: 8px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+  font-size: 0.75rem;
+  margin-bottom: 6px;
+  padding-bottom: 4px;
+  padding-top: 20px;
+}
+
+.data-tile-username,
+.data-tile-replies-count {
+  color: rgba(255, 215, 0, 0.7);
+  font-size: 0.8rem;
 }
 
 .data-tile-username {
-  color: rgba(255, 215, 0, 0.7);
   font-weight: 500;
-  font-size: 0.8rem;
 }
 
 .data-tile-replies-count {
-  color: rgba(255, 215, 0, 0.7);
   font-weight: 400;
-  font-size: 0.8rem;
 }
 
 .data-tile-label {
@@ -153,12 +155,7 @@
   text-transform: capitalize;
 }
 
-.data-tile-value {
-  color: #e5e5e5;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-}
-
+.data-tile-value,
 .data-tile-html {
   color: #e5e5e5;
   word-wrap: break-word;
@@ -187,7 +184,7 @@
 .data-tile-close {
   position: absolute;
   top: 16px;
-  right: 50px;
+  right: 25px;
   width: 20px;
   height: 20px;
   background: transparent;
@@ -268,135 +265,8 @@
   box-shadow: 0 0 6px rgba(255, 215, 0, 0.6);
 }
 
-/* Responsive design – tablet */
-@media (max-width: 768px) {
-  .data-tile-container {
-    padding: 16px;
-  }
-
-  .data-tile-grid {
-    gap: 16px;
-  }
-
-  .data-tile {
-    max-width: 100%;
-    padding: 12px;
-    border-radius: 10px;
-  }
-
-  .data-tile.expanded {
-    width: 85vw;
-    height: 85vh;
-    max-width: 85vw;
-    max-height: 85vh;
-    padding: 20px;
-    border-radius: 12px;
-  }
-
-  .data-tile-close {
-    top: 12px;
-    right: 36px;
-  }
-
-  .data-tile-content {
-    font-size: 0.85rem;
-  }
-
-  .data-tile-content.expanded {
-    font-size: 1rem;
-  }
-
-  .data-tile-date {
-    font-size: 0.8rem;
-  }
-
-  .data-tile-username,
-  .data-tile-replies-count {
-    font-size: 0.75rem;
-  }
-
-  .data-tile-loading,
-  .data-tile-error,
-  .data-tile-empty {
-    padding: 24px 16px;
-    font-size: 1rem;
-  }
-}
-
-/* Phone – large */
-@media (max-width: 480px) {
-  .data-tile-container {
-    padding: 12px;
-  }
-
-  .data-tile-grid {
-    gap: 12px;
-  }
-
-  .data-tile {
-    padding: 10px;
-    border-radius: 8px;
-  }
-
-  .data-tile.expanded {
-    width: 94vw;
-    height: 90vh;
-    max-width: 94vw;
-    max-height: 90vh;
-    padding: 16px;
-    padding-top: 44px;
-    border-radius: 10px;
-  }
-
-  .data-tile-close {
-    top: 10px;
-    right: 12px;
-    width: 36px;
-    height: 36px;
-    font-size: 18px;
-    min-width: 36px;
-    min-height: 36px;
-  }
-
-  .data-tile-content {
-    font-size: 0.8rem;
-    gap: 6px;
-  }
-
-  .data-tile-content.expanded {
-    font-size: 0.95rem;
-    gap: 12px;
-  }
-
-  .data-tile-date {
-    font-size: 0.75rem;
-    margin-bottom: 6px;
-    padding-bottom: 6px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0 0.25em;
-  }
-
-  .data-tile-username,
-  .data-tile-replies-count {
-    font-size: 0.7rem;
-  }
-
-  .data-tile-loading,
-  .data-tile-error,
-  .data-tile-empty {
-    padding: 20px 12px;
-    font-size: 0.95rem;
-  }
-
-  .post-reply-toggle-button {
-    padding: 8px 14px;
-    font-size: 0.85rem;
-  }
-}
-
-/* Phone – small (e.g. iPhone SE, narrow devices) */
-@media (max-width: 390px) {
+/* ≤300px: single block replaces three duplicate queries (cascade preserved). */
+@media (max-width: 300px) {
   .data-tile-container {
     padding: 8px;
   }
@@ -406,6 +276,7 @@
   }
 
   .data-tile {
+    max-width: 100%;
     padding: 8px;
     border-radius: 6px;
   }
@@ -432,14 +303,12 @@
 
   .data-tile-content {
     font-size: 0.78rem;
+    gap: 6px;
   }
 
   .data-tile-content.expanded {
     font-size: 0.9rem;
-  }
-
-  .data-tile-date {
-    font-size: 0.7rem;
+    gap: 12px;
   }
 
   .data-tile-username,
@@ -453,10 +322,14 @@
     padding: 16px 10px;
     font-size: 0.9rem;
   }
+
+  .post-reply-toggle-button {
+    padding: 8px 14px;
+    font-size: 0.85rem;
+  }
 }
 
-/* Phone – very small (320px) */
-@media (max-width: 320px) {
+@media (max-width: 200px) {
   .data-tile-container {
     padding: 6px;
   }

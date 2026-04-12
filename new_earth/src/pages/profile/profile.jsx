@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import supabase from "../../services/supabaseClient";
 import "./profile.css";
 
@@ -7,71 +7,72 @@ const Profile = () => {
   const [loading, setLoading] = useState(true);
   const [userPosts, setUserPosts] = useState([]);
   const [error, setError] = useState("");
+  const [deletingKey, setDeletingKey] = useState(null);
 
-  useEffect(() => {
-    const fetchUserPostsAndReplies = async (userId) => {
-      const schemas = ["faith_and_worship", "public"];
-      const collectedPosts = [];
+  const fetchUserPostsAndReplies = useCallback(async (userId) => {
+    const schemas = ["faith_and_worship", "public"];
+    const collectedPosts = [];
 
-      for (const schema of schemas) {
-        const { data: posts, error: postsError } = await supabase
-          .schema(schema)
-          .from("post")
-          .select("*")
-          .eq("user_id", userId)
-          .order("created_at", { ascending: false });
+    for (const schema of schemas) {
+      const { data: posts, error: postsError } = await supabase
+        .schema(schema)
+        .from("post")
+        .select("*")
+        .eq("user_id", userId)
+        .order("created_at", { ascending: false });
 
-        if (postsError) {
-          console.error(`Error fetching posts from ${schema}:`, postsError);
-          continue;
-        }
+      if (postsError) {
+        console.error(`Error fetching posts from ${schema}:`, postsError);
+        continue;
+      }
 
-        (posts || []).forEach((post) => {
-          collectedPosts.push({
-            ...post,
-            post_id: post.post_id ?? post.id,
-            schema,
-            replies: [],
-          });
+      (posts || []).forEach((post) => {
+        collectedPosts.push({
+          ...post,
+          post_id: post.post_id ?? post.id,
+          schema,
+          replies: [],
+        });
+      });
+    }
+
+    const postIds = collectedPosts
+      .map((post) => post.post_id)
+      .filter((postId) => postId !== null && postId !== undefined);
+
+    if (postIds.length > 0) {
+      const { data: replies, error: repliesError } = await supabase
+        .schema("faith_and_worship")
+        .from("replies")
+        .select("*")
+        .in("post_id", postIds)
+        .order("created_at", { ascending: true });
+
+      if (repliesError) {
+        console.error("Error fetching replies:", repliesError);
+      } else {
+        const repliesByPostId = {};
+        (replies || []).forEach((reply) => {
+          if (!repliesByPostId[reply.post_id]) {
+            repliesByPostId[reply.post_id] = [];
+          }
+          repliesByPostId[reply.post_id].push(reply);
+        });
+
+        collectedPosts.forEach((post) => {
+          post.replies = repliesByPostId[post.post_id] || [];
         });
       }
+    }
 
-      const postIds = collectedPosts
-        .map((post) => post.post_id)
-        .filter((postId) => postId !== null && postId !== undefined);
+    collectedPosts.sort(
+      (a, b) =>
+        new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
+    );
+    setUserPosts(collectedPosts);
+  }, []);
 
-      if (postIds.length > 0) {
-        const { data: replies, error: repliesError } = await supabase
-          .schema("faith_and_worship")
-          .from("replies")
-          .select("*")
-          .in("post_id", postIds)
-          .order("created_at", { ascending: true });
-
-        if (repliesError) {
-          console.error("Error fetching replies:", repliesError);
-        } else {
-          const repliesByPostId = {};
-          (replies || []).forEach((reply) => {
-            if (!repliesByPostId[reply.post_id]) {
-              repliesByPostId[reply.post_id] = [];
-            }
-            repliesByPostId[reply.post_id].push(reply);
-          });
-
-          collectedPosts.forEach((post) => {
-            post.replies = repliesByPostId[post.post_id] || [];
-          });
-        }
-      }
-
-      collectedPosts.sort(
-        (a, b) =>
-          new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
-      );
-      setUserPosts(collectedPosts);
-    };
-
+  useEffect(() => {
     // Get initial session
     const fetchUserData = async () => {
       try {
@@ -112,7 +113,7 @@ const Profile = () => {
     });
 
     return () => subscription.unsubscribe();
-  }, []);
+  }, [fetchUserPostsAndReplies]);
 
   const formatDate = (dateString) => {
     if (!dateString) return "N/A";
@@ -143,6 +144,72 @@ const Profile = () => {
       user.email?.split("@")[0] ||
       "User"
     );
+  };
+
+  const getPostListKey = (post) =>
+    `${post.schema}-${post.post_id ?? post.id ?? ""}`;
+
+  const handleDeletePost = async (post) => {
+    const rowId = post.post_id ?? post.id;
+    if (!user?.id || rowId == null) return;
+    if (
+      !window.confirm(
+        "Delete this post? All replies on it will be removed. This cannot be undone.",
+      )
+    ) {
+      return;
+    }
+
+    const key = getPostListKey(post);
+    setDeletingKey(key);
+    setError("");
+
+    try {
+      const { error: repliesError } = await supabase
+        .schema("faith_and_worship")
+        .from("replies")
+        .delete()
+        .eq("post_id", rowId);
+
+      if (repliesError) {
+        console.error("Error deleting replies:", repliesError);
+      }
+
+      const deletePostInSchema = async (schemaName) => {
+        const tryColumn = async (column) => {
+          const { error: err } = await supabase
+            .schema(schemaName)
+            .from("post")
+            .delete()
+            .eq(column, rowId)
+            .eq("user_id", user.id);
+          return err;
+        };
+        let err = await tryColumn("id");
+        if (err) err = await tryColumn("post_id");
+        return err;
+      };
+
+      // Replies and tiles use faith_and_worship — always delete this row first.
+      const faithDeleteError = await deletePostInSchema("faith_and_worship");
+      if (faithDeleteError) {
+        throw faithDeleteError;
+      }
+
+      if (post.schema === "public") {
+        const publicDeleteError = await deletePostInSchema("public");
+        if (publicDeleteError) {
+          throw publicDeleteError;
+        }
+      }
+
+      setUserPosts((prev) => prev.filter((p) => getPostListKey(p) !== key));
+    } catch (err) {
+      setError(err.message || "Failed to delete post");
+      console.error("Delete post error:", err);
+    } finally {
+      setDeletingKey(null);
+    }
   };
 
   if (loading) {
@@ -213,12 +280,26 @@ const Profile = () => {
                 <div className="profile-posts-list">
                   {userPosts.map((post, index) => (
                     <div
-                      key={post.post_id ?? `${post.schema}-${index}`}
+                      key={`${getPostListKey(post)}-${index}`}
                       className="profile-post-item"
                     >
                       <div className="profile-post-meta">
                         <span>{formatDateTime(post.created_at)}</span>
-                        <span className="profile-post-schema"></span>
+                        <span className="profile-post-meta-actions">
+                          <span className="profile-post-schema">
+                            {post.schema}
+                          </span>
+                          <button
+                            type="button"
+                            className="profile-post-delete"
+                            disabled={deletingKey === getPostListKey(post)}
+                            onClick={() => handleDeletePost(post)}
+                          >
+                            {deletingKey === getPostListKey(post)
+                              ? "Deleting…"
+                              : "Delete"}
+                          </button>
+                        </span>
                       </div>
                       <div className="profile-post-content">{post.content}</div>
 
